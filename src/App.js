@@ -2,12 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
-import Home from './components/pages/home/Home';
-import Books from './components/pages/books/BookList';
-import Authors from './components/pages/authors/AuthorList';
-import Publishers from './components/pages/publishers/PublisherList';
-import Categories from './components/pages/categories/CategoryList';
-import PageNotFound from './components/pages/PageNotFound';
+import Home from './pages/home/Home';
+import BookList from './pages/books/BookList';
+import AuthorList from './pages/authors/AuthorList';
+import PublisherList from './pages/publishers/PublisherList';
+import CategoryList from './pages/categories/CategoryList';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   return (

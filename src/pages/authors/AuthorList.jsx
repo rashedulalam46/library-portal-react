@@ -1,78 +1,112 @@
 // src/components/pages/authors/AuthorList.jsx
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  getAuthors,
-  deleteAuthor as deleteAuthorApi
-} from "../../services/AuthorService";
+import { getAuthors, deleteAuthor as deleteAuthorApi } from "../../services/AuthorService";
+import AuthorCreate from "./AuthorCreate";
+import { showAlert, showConfirm } from "../../utils/alertService";
 
 function AuthorList() {
   const [authors, setAuthors] = useState([]);
+  const [filteredAuthors, setFilteredAuthors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch authors
+  const [showModal, setShowModal] = useState(false);
+  const [selectedAuthor, setSelectedAuthor] = useState(null);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Load authors
   useEffect(() => {
-    let mounted = true;
-    setLoading(true);
-    setError(null);
-
-    getAuthors()
-      .then(res => {
-        if (!mounted) return;
-        // axios returns response.data usually; adjust if your service returns differently
-        setAuthors(res.data || []);
-      })
-      .catch(err => {
-        if (!mounted) return;
-        setError(err.response?.data?.message || err.message || "Failed to load authors");
-      })
-      .finally(() => {
-        if (mounted) setLoading(false);
-      });
-
-    return () => {
-      mounted = false;
-    };
+    loadAuthors();
   }, []);
 
-  // Delete handler
+  const loadAuthors = () => {
+    setLoading(true);
+    getAuthors()
+      .then((res) => {
+        setAuthors(res.data || []);
+        setFilteredAuthors(res.data || []);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err.response?.data?.message || err.message || "Failed to load authors");
+      })
+      .finally(() => setLoading(false));
+  };
+
+  // Filter authors based on search term
+  useEffect(() => {
+    if (!searchTerm) {
+      setFilteredAuthors(authors);
+    } else {
+      const filtered = authors.filter(
+        (c) =>
+          (c.author_name && c.author_name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (c.address && c.address.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
+      setFilteredAuthors(filtered);
+    }
+  }, [searchTerm, authors]);
+
+  // Delete author with confirmation
   const handleDelete = async (id) => {
-    const ok = window.confirm("Are you sure you want to delete this author?");
-    if (!ok) return;
+    const confirmed = await showConfirm("Are you sure you want to delete this author?", "Delete Author");
+    if (!confirmed) return;
 
     try {
       await deleteAuthorApi(id);
-      // remove from UI
-      setAuthors(prev => prev.filter(a => a.author_id !== id)); // try both id shapes
+      const updated = authors.filter((c) => c.author_id !== id);
+      setAuthors(updated);
+      setFilteredAuthors(updated);
+      showAlert("Author deleted successfully!", "success");
     } catch (err) {
-      alert(err.response?.data?.message || err.message || "Delete failed");
-    }
-  };
+      showAlert(err.response?.data?.message || "Delete failed", "danger");
+        }
+      };
+    
+      // Add/Edit modal
+      const handleAdd = () => {
+        setSelectedAuthor(null);
+        setShowModal(true);
+      };
+
+      const handleEdit = (author) => {
+        setSelectedAuthor(author);
+        setShowModal(true);
+      };
+    
+      const handleSaveSuccess = () => {
+        setShowModal(false);
+        loadAuthors();
+      };
 
   return (
-    <div className="author-list">
+     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>Authors</h2>
-        <Link to="/authors/add" className="btn btn-primary">Add Author</Link>
+        <button className="btn btn-primary" onClick={handleAdd}>
+          Add Author
+        </button>
       </div>
 
-      {loading && (
-        <div className="text-center py-4">
-          <div className="spinner-border" role="status" aria-hidden="true"></div>
-          <div className="mt-2">Loading authors...</div>
-        </div>
-      )}
+      {/* Search Input */}
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search by name or address..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
 
-      {error && (
-        <div className="alert alert-danger" role="alert">
-          {error}
-        </div>
-      )}
+      {loading && <div className="text-center py-4">Loading authors...</div>}
+      {error && <div className="alert alert-danger">{error}</div>}
 
       {!loading && !error && (
         <>
-          {authors.length === 0 ? (
+          {filteredAuthors.length === 0 ? (
             <div className="alert alert-info">No authors found.</div>
           ) : (
             <div className="table-responsive">
@@ -80,7 +114,7 @@ function AuthorList() {
                 <thead className="table-dark">
                   <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Name</th>        
                     <th>Country</th>
                     <th>Address</th>
                     <th>Phone</th>
@@ -89,34 +123,38 @@ function AuthorList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {authors.map((author, idx) => {
-                    // adapt properties depending on your API shape
-                    const id = author.authorId;
-                    return (
-                      <tr key={id || idx}>
-                        <td>{author.author_id}</td>
+                  {filteredAuthors.map((author) => (
+                    <tr key={author.author_id}>
+                       <td>{author.author_id}</td>
                         <td>{author.author_name}</td>
                         <td>{author.country}</td>
                         <td>{author.address}</td>
                         <td>{author.phone}</td>
                         <td>{author.email}</td>
-                        <td className="text-end">                          
-                          <Link to={`/authors/edit/${id}`} className="btn btn-sm btn-outline-secondary me-2">
-                            Edit
-                          </Link>
-                          <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(author.author_id)}>
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                      <td className="text-end">
+                        <button className="btn btn-sm btn-outline-secondary me-3" onClick={() => handleEdit(author)}>
+                          Edit
+                        </button>
+                        <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(author.author_id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           )}
         </>
       )}
+
+      {/* Modal */}
+      <AuthorCreate
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        author={selectedAuthor}
+        onSaveSuccess={handleSaveSuccess}
+      />
     </div>
   );
 }

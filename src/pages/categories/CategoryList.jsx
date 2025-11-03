@@ -45,7 +45,7 @@ function CategoryList() {
     try {
       await deleteCategoryApi(id);
       // remove from UI
-      setCategories(prev => prev.filter(c => c.id !== id && c.category_id !== id)); // try both id shapes
+      setCategories(prev => prev.filter(c => c.category_id !== id)); // try both id shapes
     } catch (err) {
       alert(err.response?.data?.message || err.message || "Delete failed");
     }
@@ -101,10 +101,7 @@ function CategoryList() {
                           <Link to={`/authors/edit/${id}`} className="btn btn-sm btn-outline-secondary me-2">
                             Edit
                           </Link>
-                          <button
-                            className="btn btn-sm btn-outline-danger"
-                            onClick={() => handleDelete(id)}
-                          >
+                          <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(category.category_id)}>
                             Delete
                           </button>
                         </td>

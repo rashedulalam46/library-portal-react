@@ -44,7 +44,7 @@ function AuthorList() {
     try {
       await deleteAuthorApi(id);
       // remove from UI
-      setAuthors(prev => prev.filter(a => a.id !== id && a.authorId !== id)); // try both id shapes
+      setAuthors(prev => prev.filter(a => a.author_id !== id)); // try both id shapes
     } catch (err) {
       alert(err.response?.data?.message || err.message || "Delete failed");
     }
@@ -104,10 +104,7 @@ function AuthorList() {
                           <Link to={`/authors/edit/${id}`} className="btn btn-sm btn-outline-secondary me-2">
                             Edit
                           </Link>
-                          <button
-                            className="btn btn-sm btn-outline-danger"
-                            onClick={() => handleDelete(id)}
-                          >
+                          <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(author.author_id)}>
                             Delete
                           </button>
                         </td>

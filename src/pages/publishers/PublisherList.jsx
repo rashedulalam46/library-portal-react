@@ -93,6 +93,7 @@ function PublisherList() {
                     const id = publisher.publisher_id;
                     return (
                       <tr key={id || idx}>
+                        <td>{publisher.publisher_id}</td>
                         <td>{publisher.publisher_name}</td>
                         <td>{publisher.description}</td>
                         <td>{publisher.address}</td>
@@ -102,10 +103,7 @@ function PublisherList() {
                           <Link to={`/publishers/edit/${id}`} className="btn btn-sm btn-outline-secondary me-2">
                             Edit
                           </Link>
-                          <button
-                            className="btn btn-sm btn-outline-danger"
-                            onClick={() => handleDelete(id)}
-                          >
+                          <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(publisher.publisher_id)}>
                             Delete
                           </button>
                         </td>

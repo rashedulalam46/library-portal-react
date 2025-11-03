@@ -6,7 +6,7 @@ import {
   deleteAuthor as deleteAuthorApi
 } from "../../services/AuthorService";
 
-export default function AuthorList() {
+function AuthorList() {
   const [authors, setAuthors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -84,7 +84,7 @@ export default function AuthorList() {
                     <th>Country</th>
                     <th>Address</th>
                     <th>Phone</th>
-                    <th>Email</th>                   
+                    <th>Email</th>
                     <th className="text-end">Actions</th>
                   </tr>
                 </thead>
@@ -99,7 +99,7 @@ export default function AuthorList() {
                         <td>{author.country}</td>
                         <td>{author.address}</td>
                         <td>{author.phone}</td>
-                        <td>{author.email}</td>                       
+                        <td>{author.email}</td>
                         <td className="text-end">
                           <Link to={`/authors/${id}`} className="btn btn-sm btn-outline-info me-2">
                             View
@@ -126,3 +126,5 @@ export default function AuthorList() {
     </div>
   );
 }
+
+export default AuthorList;

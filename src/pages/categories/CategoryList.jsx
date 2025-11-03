@@ -97,10 +97,7 @@ function CategoryList() {
                         <td>{category.category_id}</td>
                         <td>{category.category_name}</td>
                         <td>{category.description}</td>
-                        <td className="text-end">
-                          <Link to={`/authors/${id}`} className="btn btn-sm btn-outline-info me-2">
-                            View
-                          </Link>
+                        <td className="text-end">                         
                           <Link to={`/authors/edit/${id}`} className="btn btn-sm btn-outline-secondary me-2">
                             Edit
                           </Link>

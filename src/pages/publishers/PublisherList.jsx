@@ -98,10 +98,7 @@ function PublisherList() {
                         <td>{publisher.address}</td>
                         <td>{publisher.phone}</td>
                         <td>{publisher.email}</td>
-                        <td className="text-end">
-                          <Link to={`/publishers/${id}`} className="btn btn-sm btn-outline-info me-2">
-                            View
-                          </Link>
+                        <td className="text-end">                         
                           <Link to={`/publishers/edit/${id}`} className="btn btn-sm btn-outline-secondary me-2">
                             Edit
                           </Link>

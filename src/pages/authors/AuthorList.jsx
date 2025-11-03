@@ -100,10 +100,7 @@ function AuthorList() {
                         <td>{author.address}</td>
                         <td>{author.phone}</td>
                         <td>{author.email}</td>
-                        <td className="text-end">
-                          <Link to={`/authors/${id}`} className="btn btn-sm btn-outline-info me-2">
-                            View
-                          </Link>
+                        <td className="text-end">                          
                           <Link to={`/authors/edit/${id}`} className="btn btn-sm btn-outline-secondary me-2">
                             Edit
                           </Link>

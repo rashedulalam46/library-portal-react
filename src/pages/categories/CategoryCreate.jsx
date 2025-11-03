@@ -9,7 +9,7 @@ function CategoryCreate({ show, onHide, category, onSaveSuccess }) {
 
   const modalRef = useRef(null);
   const bsModalRef = useRef(null);
-  const initializedRef = useRef(false); // ✅ ensure modal init only once
+  const initializedRef = useRef(false);
 
   // Load category data
   useEffect(() => {

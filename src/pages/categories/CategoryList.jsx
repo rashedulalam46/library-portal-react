@@ -1,11 +1,18 @@
-import React from "react";  
-function AuthorCreate() {
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  getCategories,
+  deleteCategory as deleteCategoryApi
+} from "../../services/CategoryService";
+
+
+function CategoryList() {
   return (
-    <div className="author-create">
-      <h2>Create New Author</h2>
-      {/* Form to create a new author */}
+    <div className="category-list">
+      <h2>Category List</h2>
+      {/* Render the list of categories here */}
     </div>
   );
 }
 
-export default AuthorCreate;
+export default CategoryList;

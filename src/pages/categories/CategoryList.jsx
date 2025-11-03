@@ -124,16 +124,10 @@ function CategoryList() {
                       <td>{category.category_name}</td>
                       <td>{category.description}</td>
                       <td className="text-end">
-                        <button
-                          className="btn btn-sm btn-outline-secondary me-2"
-                          onClick={() => handleEdit(category)}
-                        >
+                        <button className="btn btn-sm btn-outline-secondary me-2" onClick={() => handleEdit(category)}>                        
                           Edit
                         </button>
-                        <button
-                          className="btn btn-sm btn-outline-danger"
-                          onClick={() => handleDelete(category.category_id)}
-                        >
+                        <button className="btn btn-sm btn-outline-danger" onClick={() => handleDelete(category.category_id)}>
                           Delete
                         </button>
                       </td>

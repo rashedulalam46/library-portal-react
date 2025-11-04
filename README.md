@@ -27,7 +27,7 @@ This repository covers the ReactJS client part of the system — the backend API
 ## Getting Started
 ### Prerequisites
 - Node.js (>= 12.x) and npm (or yarn) installed.
-- Backend API service running (or mock API endpoints for testing).
+- Backend API service running (or mock API endpoints for testing)
 - [You can use this REST API](https://github.com/rashedulalam46/library-api-sqlserver)
 
 ## Installation

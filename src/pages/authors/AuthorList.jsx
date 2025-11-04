@@ -62,27 +62,27 @@ function AuthorList() {
       showAlert("Author deleted successfully!", "success");
     } catch (err) {
       showAlert(err.response?.data?.message || "Delete failed", "danger");
-        }
-      };
-    
-      // Add/Edit modal
-      const handleAdd = () => {
-        setSelectedAuthor(null);
-        setShowModal(true);
-      };
+    }
+  };
 
-      const handleEdit = (author) => {
-        setSelectedAuthor(author);
-        setShowModal(true);
-      };
-    
-      const handleSaveSuccess = () => {
-        setShowModal(false);
-        loadAuthors();
-      };
+  // Add/Edit modal
+  const handleAdd = () => {
+    setSelectedAuthor(null);
+    setShowModal(true);
+  };
+
+  const handleEdit = (author) => {
+    setSelectedAuthor(author);
+    setShowModal(true);
+  };
+
+  const handleSaveSuccess = () => {
+    setShowModal(false);
+    loadAuthors();
+  };
 
   return (
-     <div className="container mt-4">
+    <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2>Authors</h2>
         <button className="btn btn-primary" onClick={handleAdd}>
@@ -114,7 +114,7 @@ function AuthorList() {
                 <thead className="table-dark">
                   <tr>
                     <th>ID</th>
-                    <th>Name</th>        
+                    <th>Name</th>
                     <th>Country</th>
                     <th>Address</th>
                     <th>Phone</th>
@@ -125,12 +125,12 @@ function AuthorList() {
                 <tbody>
                   {filteredAuthors.map((author) => (
                     <tr key={author.author_id}>
-                       <td>{author.author_id}</td>
-                        <td>{author.author_name}</td>
-                        <td>{author.country}</td>
-                        <td>{author.address}</td>
-                        <td>{author.phone}</td>
-                        <td>{author.email}</td>
+                      <td>{author.author_id}</td>
+                      <td>{author.author_name}</td>
+                      <td>{author.country}</td>
+                      <td>{author.address}</td>
+                      <td>{author.phone}</td>
+                      <td>{author.email}</td>
                       <td className="text-end">
                         <button className="btn btn-sm btn-outline-secondary me-3" onClick={() => handleEdit(author)}>
                           Edit

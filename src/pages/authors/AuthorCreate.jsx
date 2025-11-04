@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
-import { addPublisher as createPublisher, updatePublisher } from "../../services/PublisherService";
+import { addAuthor as createAuthor, updateAuthor } from "../../services/AuthorService";
+import { getCountries } from "../../services/DropdownService";
 import { showAlert } from "../../utils/alertService";
 
 
 function AuthorCreate({ show, onHide, author, onSaveSuccess }) {
   const [author_name, setAuthorName] = useState("");
   const [country, setCountry] = useState("");
+  const [countries, setCountries] = useState([]);
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -14,6 +16,19 @@ function AuthorCreate({ show, onHide, author, onSaveSuccess }) {
   const modalRef = useRef(null);
   const bsModalRef = useRef(null);
   const initializedRef = useRef(false);
+
+  // Load country dropdown data once
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const res = await getCountries();
+        setCountries(res.data || []); // assuming API returns { data: [...] }
+      } catch (err) {
+        showAlert("Failed to load countries", "danger");
+      }
+    };
+    fetchCountries();
+  }, []);
 
   // Load author data
   useEffect(() => {
@@ -84,10 +99,10 @@ function AuthorCreate({ show, onHide, author, onSaveSuccess }) {
 
     try {
       if (author) {
-        await updatePublisher(author.author_id, payload);
+        await updateAuthor(author.author_id, payload);
         showAlert("Author updated successfully!", "success");
       } else {
-        await createPublisher(payload);
+        await createAuthor(payload);
         showAlert("Author created successfully!", "success");
       }
 
@@ -137,14 +152,21 @@ function AuthorCreate({ show, onHide, author, onSaveSuccess }) {
                 />
               </div>
 
-               <div className="mb-3">
+              <div className="mb-3">
                 <label className="form-label">Country</label>
-                <textarea
-                  className="form-control"
-                  rows="3"
+                <select
+                  className="form-select"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                ></textarea>
+                  required
+                >
+                  <option value="">Select Country</option>
+                  {countries.map((c, index) => (
+                    <option key={index} value={c.value}>
+                      {c.text}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="mb-3">

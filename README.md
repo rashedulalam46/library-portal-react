@@ -31,17 +31,17 @@ This repository covers the React client part of the system — the backend API i
 - [You can use this REST API](https://github.com/rashedulalam46/library-api-sqlserver)
 
 ## Installation
-### Clone this repository:
+### 1. Clone this repository:
 ```
 git clone https://github.com/rashedulalam46/library-portal-react.git
 cd library-portal-react
 ```
-### Install dependencies:
+### 2. Install dependencies:
 ```
 npm install
 ```
 
-### Running the App
+### 3. Running the App
 ```
 npm start
 ```

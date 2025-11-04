@@ -2,7 +2,7 @@
 
 A web-client application built with React for managing and accessing library resources. This project provides a client-side portal for a library management system. It allows users to browse, view, and manage library resources such as books, authors, categories, and publishers through an intuitive and responsive interface.
 
-This repository covers the React client part of the system — the backend API is assumed to be a separate service providing data operations.
+This repository covers the ReactJS client part of the system — the backend API is assumed to be a separate service providing data operations.
 
 ## Features
 
@@ -18,7 +18,7 @@ This repository covers the React client part of the system — the backend API i
 - Easy to extend and maintain
 
 ## Tech Stack
-- ReactJS, JavaScript
+- React, JavaScript
 - HTML5 / CSS3
 - Bootstrap (for UI styling)
 - Axios (for REST API communication)

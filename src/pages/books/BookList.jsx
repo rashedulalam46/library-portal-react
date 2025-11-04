@@ -120,8 +120,8 @@ function BookList() {
                     <th>ID</th>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>Author</th>
                     <th>Category</th>
+                    <th>Author</th>
                     <th>Publisher</th>
                     <th className="text-end">Actions</th>
                   </tr>
@@ -132,8 +132,8 @@ function BookList() {
                       <td>{book.book_id}</td>
                       <td>{book.title}</td>
                       <td>{book.description}</td>
-                      <td>{book.author_name}</td>
                       <td>{book.category_name}</td>
+                      <td>{book.author_name}</td>
                       <td>{book.publisher_name}</td>
                       <td className="text-end">
                         <button className="btn btn-sm btn-outline-secondary me-3" onClick={() => handleEdit(book)}>

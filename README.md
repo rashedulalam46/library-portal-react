@@ -33,3 +33,28 @@ This repository covers the React client part of the system — the backend API i
 ### Prerequisites
 - Node.js (>= 12.x) and npm (or yarn) installed.
 - Backend API service running (or mock API endpoints for testing).
+
+## Installation
+### Clone this repository:
+```
+git clone https://github.com/rashedulalam46/library-portal-react.git
+cd library-portal-react
+```
+### Install dependencies:
+```
+npm install
+```
+
+### Running the App
+```
+npm start
+```
+The app will open in your browser at: http://localhost:3000/
+
+## Usage
+
+- Once the app is running:
+- Visit the Home page for an overview.
+- Navigate to Books, Categories, Publishers, or Authors pages to manage data.
+- Use the navigation bar to switch between pages.
+- Data operations (create, edit, delete) will reflect changes from/to the connected REST API.

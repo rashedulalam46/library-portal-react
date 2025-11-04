@@ -21,3 +21,15 @@ This repository covers the React client part of the system — the backend API i
 - Clean, modular component-based architecture
 - REST API integration for data fetching and CRUD operations
 - Easy to extend and maintain
+
+## Tech Stack
+- React (JavaScript)
+- HTML5 / CSS3
+- Bootstrap (for UI styling)
+- Axios (for REST API communication)
+- React Router (for page navigation)
+
+## Getting Started
+### Prerequisites
+- Node.js (>= 12.x) and npm (or yarn) installed.
+- Backend API service running (or mock API endpoints for testing).

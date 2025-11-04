@@ -1,11 +1,6 @@
 # Library Portal (React)
 
-A web-client application built with React for managing and accessing library resources.
-
-
-## About
-
-This project provides a client-side portal for a library management system. It allows users to browse, view, and manage library resources such as books, authors, categories, and publishers through an intuitive and responsive interface.
+A web-client application built with React for managing and accessing library resources. This project provides a client-side portal for a library management system. It allows users to browse, view, and manage library resources such as books, authors, categories, and publishers through an intuitive and responsive interface.
 
 This repository covers the React client part of the system — the backend API is assumed to be a separate service providing data operations.
 
@@ -33,6 +28,7 @@ This repository covers the React client part of the system — the backend API i
 ### Prerequisites
 - Node.js (>= 12.x) and npm (or yarn) installed.
 - Backend API service running (or mock API endpoints for testing).
+- [You can use this REST API](https://github.com/rashedulalam46/library-api-sqlserver)
 
 ## Installation
 ### Clone this repository:

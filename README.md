@@ -18,7 +18,7 @@ This repository covers the React client part of the system — the backend API i
 - Easy to extend and maintain
 
 ## Tech Stack
-- React (JavaScript)
+- ReactJS, JavaScript
 - HTML5 / CSS3
 - Bootstrap (for UI styling)
 - Axios (for REST API communication)

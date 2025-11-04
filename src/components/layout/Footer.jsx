@@ -2,8 +2,8 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="footer">
-      <p>&copy; 2023 Library Portal. All rights reserved.</p>
+    <footer style={{ backgroundColor: "#282c34", color: "white", padding: "10px", textAlign: "center" }}>
+      <p>© {new Date().getFullYear()} Library Portal. All rights reserved.</p>
     </footer>
   );
 }
